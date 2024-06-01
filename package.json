@@ -1,5 +1,6 @@
 {
   "name": "ventas-web-ui",
+  "homepage": "https://nachopedulla.github.io/ventas-web-ui",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -6,7 +6,7 @@ import SalesProvider from "./pages/sales/SalesProvider";
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter  basename={process.env.PUBLIC_URL}> 
       <Routes>
         <Route
           element={<Layout />}

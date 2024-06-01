@@ -6,7 +6,7 @@ import SalesProvider from "./pages/sales/SalesProvider";
 
 const Router = () => {
   return (
-    <BrowserRouter  basename={process.env.PUBLIC_URL}> 
+    <BrowserRouter basename={`/${process.env.PUBLIC_URL}`}> 
       <Routes>
         <Route
           element={<Layout />}
@@ -39,7 +39,9 @@ const Router = () => {
               />
             }
           />
+          
         </Route>
+        < Route path="" element={<StockProvider/> } />
       </Routes>
     </BrowserRouter>
   )

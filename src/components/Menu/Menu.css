@@ -1,0 +1,31 @@
+.menu {
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    background-color: #0050C3;
+    position: fixed;
+    height: 70px;
+    top: 70px;
+    left: 0px;
+    width: 100%;
+}
+
+.menuItem {
+    width: 120px;
+    color: white;
+    cursor: pointer;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    border: none;
+    background-color: #0050C3;
+    font-size: 1rem;
+    &:hover {
+        background-color: #5c8fd6;
+    }
+    &:active {
+        background-color: #5c8fd6;
+    }
+}
+  

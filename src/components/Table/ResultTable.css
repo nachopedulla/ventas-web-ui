@@ -1,0 +1,23 @@
+.table-header {
+    font-weight: bold;
+ }
+
+ .result-table {
+    margin: 15px auto 100px auto;
+ }
+
+ .table-icons {
+    display: flex;
+    justify-content: start;
+    column-gap: 25px;
+ }
+
+.search-button {
+    max-height: 54px;
+    font-size: .9rem
+}
+
+.actions {
+    display: flex;
+    column-gap: 15px;
+}

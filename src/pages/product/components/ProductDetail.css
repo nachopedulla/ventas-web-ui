@@ -1,0 +1,29 @@
+.product-detail-list {
+    list-style-type: none;
+    padding: 10px;
+    min-width: 90%;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.product-detail-title {
+    color: #0050C3;
+}
+
+.product-detail-item {
+    font-size: .85rem;
+    column-gap: 30px;
+    display: flex;
+    justify-content: space-between;
+    text-align: end;
+    text-overflow: clip;
+}
+
+.product-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}

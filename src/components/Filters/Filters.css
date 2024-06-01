@@ -1,0 +1,27 @@
+.filter-text {
+    font-size: .8rem;
+    color: rgb(111, 111, 111);
+}
+
+.filter {
+    padding: none;
+    width: 250px;
+
+    @media (max-width: 550px) {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+.filters {
+    display: flex;
+    column-gap: 10px;
+    margin-top: 30px;
+
+    @media (max-width: 550px) {
+        flex-direction: column;
+        align-items: center; 
+        column-gap: 0px;
+        gap: 15px;
+    }
+}

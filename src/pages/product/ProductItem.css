@@ -1,0 +1,36 @@
+.product-form {
+    margin: 50px auto 35px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 25px
+}
+
+.product-filter {
+    width: 20%;
+    padding: none;
+    gap: 0px;
+
+    @media (max-width: 1700px) {
+        width: 30%;
+    }
+
+    @media (max-width: 1200px) {
+        width: 45%;
+    }
+
+    @media (max-width: 600px) {
+        width: 100%;
+    }
+}
+
+.product-buttons {
+    display: flex;
+    justify-content: center;
+    column-gap: 15px;
+    margin-bottom: 50px;
+}
+
+.product-button {
+    width: 110px;
+}

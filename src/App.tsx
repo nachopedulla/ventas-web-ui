@@ -1,11 +1,17 @@
+import { CategoriesProvider } from './context/CategoryContext';
 import { ProductProvider } from './context/ProductContext';
-import Router from './Router';
+import { UserProvider } from './context/UserContext';
+import Router from './router/Router';
 
 function App() {
   return (
+    <UserProvider>
+    <CategoriesProvider>
       <ProductProvider>
-        <Router/>
+        <Router />
       </ProductProvider>
+    </CategoriesProvider>
+    </UserProvider>
   );
 }
 

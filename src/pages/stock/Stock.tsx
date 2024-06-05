@@ -1,7 +1,7 @@
 import { FaPlus } from "@react-icons/all-files/fa/FaPlus";
 import SuccessIconButton from "../../components/Button/Success";
 import Filters from "../../components/Filters/Filters";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import { useProducts } from "../../context/ProductContext";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,8 @@ import ResultTable, { Header } from "../../components/Table/ResultTable";
 import { Form } from "../../models/Filter";
 import { SearchRequest } from "../../models/Movement";
 import { Product } from "../../models/Product";
+import ProductDetail from "../product/components/ProductDetail";
+import { isNotFiltered } from "../../utils/RequestUtils";
 
 const Stock = ({ forms, headers }: { forms: Array<Form>, headers: Array<Header> }) => {
 
@@ -36,8 +38,9 @@ const Stock = ({ forms, headers }: { forms: Array<Form>, headers: Array<Header> 
 
     const filterAndSort = (): Array<Product> => {
         var totalProducts = products.get()
-            .filter(product => searchRequest.name === undefined || product.name?.toUpperCase().includes(searchRequest.name.toUpperCase()))
-            .filter(product => searchRequest.category === undefined || product.category === searchRequest.category);
+            .filter(product => isNotFiltered(searchRequest.name) || product.name?.toUpperCase().includes(searchRequest.name!.toUpperCase()))
+            .filter(product => isNotFiltered(searchRequest.category) || product.category === searchRequest.category);
+
         totalProducts.sort((a, b) => a.barCode! < b.barCode! ? 1 : - 1)
         return totalProducts;
     }
@@ -62,15 +65,6 @@ const Stock = ({ forms, headers }: { forms: Array<Form>, headers: Array<Header> 
                     icon={<FaPlus size={13} />}
                     handler={addProduct}
                 />
-                {
-                    /* TODO: agregar categorías 
-                    <SuccessIconButton
-                        text='Nueva Categoría'
-                        icon={<FaPlus size={13} />}
-                        handler={addProduct}
-                    />
-                    */
-                }
             </div>
             <ResultTable
                 headers={headers}
@@ -83,7 +77,12 @@ const Stock = ({ forms, headers }: { forms: Array<Form>, headers: Array<Header> 
                 cancel={handleConfirm}
                 confirm={removeHandler}
             >
-                <p>¿Está segudo de que desea eliminar el elemento?</p>
+                
+                <ProductDetail 
+                    title="¿Está segudo de que desea eliminar el elemento?"
+                    product={products.getById(selectedItem!)!}
+                />
+                
             </Modal>
         </>
     );

@@ -2,7 +2,7 @@
 import React from "react";
 import moment from "moment";
 import { Product } from "../models/Product";
-import { DATA } from "../mocks/ProductMock";
+import { PRODUCT_DATA } from "../mocks/ProductMock";
 
 
 const ProductContext = React.createContext({
@@ -17,8 +17,8 @@ const ProductProvider = (props: any) => {
     const get = () : Array<Product> => {
         var products = localStorage.getItem('products');
         if (products === null || expiration() < new Date()) {
-            setItems(DATA);
-            products = JSON.stringify(DATA);
+            setItems(PRODUCT_DATA);
+            products = JSON.stringify(PRODUCT_DATA);
             /* Sets the expiration to 30 minutes */
             setExpiration(moment(new Date()).add(30, 'm').toDate());
         }

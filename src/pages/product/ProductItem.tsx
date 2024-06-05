@@ -2,19 +2,22 @@ import { Button, InputAdornment, MenuItem, TextField } from "@mui/material"
 import { FaDollarSign } from "@react-icons/all-files/fa/FaDollarSign";
 import { FaBarcode } from "@react-icons/all-files/fa/FaBarcode";
 import { useNavigate, useParams } from "react-router-dom";
-import { Category, Product } from "../../models/Product";
+import { Product } from "../../models/Product";
 import { useEffect, useState } from "react";
 import TooltipIconButton from "../../components/TooltipIconButton/TooltipIconButton";
 import { useProducts } from "../../context/ProductContext";
 import Modal from "../../components/Modal/Modal";
 import './ProductItem.css';
 import ProductDetail from "./components/ProductDetail";
+import { useCategories } from "../../context/CategoryContext";
 
 const ProductItem = ({ title }: { title: string }) => {
 
     const { productId } = useParams();
+
     const navigate = useNavigate();
     const products = useProducts();
+    const categories = useCategories();
 
     const [product, setProduct] = useState<Product | undefined>(undefined);
     const [disabled, setDisabled] = useState(true);
@@ -89,10 +92,11 @@ const ProductItem = ({ title }: { title: string }) => {
                     onChange={(event) => changeHandler('category', event)}
                 >
                     <MenuItem value={undefined}></MenuItem>
-                    <MenuItem value={Category.ALMACEN}>{Category.ALMACEN}</MenuItem>
-                    <MenuItem value={Category.ACEITES}>{Category.ACEITES}</MenuItem>
-                    <MenuItem value={Category.CONGELADOS}>{Category.CONGELADOS}</MenuItem>
-                    <MenuItem value={Category.LACTEOS}>{Category.LACTEOS}</MenuItem>
+                    {
+                        categories.get().map(category => 
+                            <MenuItem key={category} value={category}>{category}</MenuItem>
+                        )
+                    }
                 </TextField>
                 <TextField
                     disabled={disabled}
@@ -174,7 +178,10 @@ const ProductItem = ({ title }: { title: string }) => {
                 cancel={() => setShowConfirmation(!showConfirmation)}
                 confirm={save}
             >
-                <ProductDetail product={product}/>
+                <ProductDetail
+                    title="DETALLE DEL PRODUCTO"
+                    product={product}
+                />
             </Modal>
         </div>
     )

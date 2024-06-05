@@ -8,10 +8,6 @@
     gap: 5px;
 }
 
-.product-detail-title {
-    color: #0050C3;
-}
-
 .product-detail-item {
     font-size: .85rem;
     column-gap: 30px;
@@ -26,4 +22,9 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
+}
+
+.product-detail-title {
+    width: 120px;
+    text-align: start;
 }

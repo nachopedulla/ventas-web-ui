@@ -2,10 +2,12 @@ export interface Form {
     id: string,
     type: string,
     label: string,
-    options?: Array<Option>
+    options?: Array<Option>,
+    default?: string
 }
 
 export interface Option {
     value: any,
-    label: string
+    label: string,
+    color?: string
 }

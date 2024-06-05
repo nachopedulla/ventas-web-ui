@@ -1,13 +1,11 @@
-import { Category } from "../models/Product";
-
-export const DATA = [
+export const PRODUCT_DATA = [
     {
         id: 'ab34c-dc9c8-aa1ac-b1a24',
         barCode: '10000001',
-        name: 'Fideos Matarazzo',
+        name: 'Fideos Matarazzo - 500g',
         unitaryPrice: 1000.50,
         unitaryCost: 400,
-        category: Category.ALMACEN,
+        category: 'Almacén - Productos Secos',
         stock: 30
     },
     {
@@ -15,7 +13,7 @@ export const DATA = [
         barCode: '10000002',
         name: 'Royal Canin - 1KG - Adulto',
         unitaryPrice: 9450,
-        category: Category.CONGELADOS,
+        category: 'Mascotas',
         unitaryCost: 3250.32,
         stock: 2
     }

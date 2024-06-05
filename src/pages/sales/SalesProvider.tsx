@@ -1,7 +1,9 @@
 import { PaymentMethod } from "../../models/Movement"
 import { TableCellProps } from "@mui/material"
-import { formatAmount, formatNumber } from "../../utils/numberUtil"
+import { formatAmount, formatNumber } from "../../utils/NumberUtil"
 import Sales from "./Sales"
+import ResultTable from "../../components/Table/ResultTable"
+import { SALES_DATA } from "../../mocks/SalesMock"
 
 const FORMS = [
     {
@@ -18,7 +20,13 @@ const FORMS = [
         id: 'paymentMethod',
         type: 'select',
         label: 'Medio de pago',
+        default: 'Todos',
         options: [
+            {
+                value: 'Todos',
+                label: 'Todos',
+                color: 'grey'
+            },
             {
                 value: PaymentMethod.EFECTIVO,
                 label: 'EFECTIVO'
@@ -42,11 +50,6 @@ const HEADERS = [
         align: 'left' as TableCellProps["align"]
     },
     {
-        id: 'concept',
-        label: 'Concepto',
-        align: 'left' as TableCellProps["align"]
-    },
-    {
         id: 'amount',
         label: 'Monto',
         align: 'right' as TableCellProps["align"],
@@ -56,12 +59,19 @@ const HEADERS = [
         id: 'paymentMethod',
         label: 'Medio de pago',
         align: 'right' as TableCellProps["align"],
-        formatter: formatAmount
     },
 ]
 
 const SalesProvider = () => (
-    <Sales title="Ventas" forms={FORMS} headers={HEADERS}/>
+    <>
+        <Sales title="Ventas" forms={FORMS} headers={HEADERS} />
+        <ResultTable 
+            data={SALES_DATA} 
+            headers={HEADERS} 
+            detailHandler={() => { }}
+            removeHanlder={() => []} 
+        />
+    </>
 )
 
 export default SalesProvider;

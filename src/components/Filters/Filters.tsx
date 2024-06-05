@@ -14,14 +14,23 @@ const Filters = ({ forms, request, changeHandler }: { forms: Array<Form>, reques
                     autoComplete='off'
                     id={form.id}
                     variant='outlined'
+                    defaultValue={form.default}
                     type={form.type}
                     select={form.type === 'select'}
                     value={request[form.id as keyof SearchRequest]}
                     InputLabelProps={{ shrink: true }}
+                    SelectProps={{ MenuProps: { PaperProps: { style: { maxHeight: '300px' } } } }}
                     label={form.label}
                     onChange={(event) => changeHandler(form.id, event)}
                 >
-                    {form.options?.map(option => <MenuItem key={option.value} value={option.value}>{option.label} </MenuItem>)}
+                    {form.options?.map(option =>
+                        <MenuItem
+                            key={option.value}
+                            value={option.value}
+                            style={{ color: option.color ?? 'black' }}
+                        >
+                            {option.label}
+                        </MenuItem>)}
                 </TextField>
             ))
         }

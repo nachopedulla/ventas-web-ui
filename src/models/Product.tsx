@@ -5,13 +5,6 @@ export class Product {
     unitaryCost?: number;
     name?: string;
     description?: string;
-    category?: Category;
+    category?: string;
     stock?: number;
-}
-
-export enum Category {
-    LACTEOS = "LACTEOS",
-    CONGELADOS = "CONGELADOS",
-    ALMACEN = "ALMACEN",
-    ACEITES = "ACEITES"
 }

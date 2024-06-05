@@ -1,5 +1,5 @@
 .toolbar {
-    z-index: 100;
+    z-index: 110;
     height: 70px;
     position: fixed;
     background-color: white;
@@ -25,3 +25,16 @@
     }
 }
 
+.user-accordion {
+    width: 150px;
+    position: static;
+}
+
+.label-menu-item {
+    color: black;
+    cursor: default;
+
+    &:hover {
+        background-color: white;
+    }
+}

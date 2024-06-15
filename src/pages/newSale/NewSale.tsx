@@ -99,6 +99,12 @@ const NewSale = () => {
         navigate('/ventas');
     }
 
+    const paymentMethodHandler = (paymentMethod: PaymentMethod) => {
+        const auxSale = { ...sale };
+        auxSale.paymentMethod = paymentMethod;
+        setSale(auxSale)
+    }
+
     return (
         <>
             <PageTitle text="Nueva venta" />
@@ -166,11 +172,7 @@ const NewSale = () => {
                     <SaleConfirmation
                         sale={sale}
                         paymentMethod={sale.paymentMethod!}
-                        changeHandler={(paymentMethod: PaymentMethod) => {
-                            const auxSale = { ...sale };
-                            auxSale.paymentMethod = paymentMethod;
-                            setSale(sale)
-                        }}
+                        changeHandler={paymentMethodHandler}
                     />
                 </Modal>
             </div>

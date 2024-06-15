@@ -6,7 +6,7 @@ import { unityMap } from "../../../models/Product";
 import { FaDollarSign } from "@react-icons/all-files/fa/FaDollarSign";
 
 const SaleConfirmation = (
-    { sale, paymentMethod, changeHandler }: 
+    { sale, changeHandler }: 
     { sale: Sale, paymentMethod: PaymentMethod, changeHandler: Function}
 ) => {
 
@@ -28,7 +28,7 @@ const SaleConfirmation = (
                                 className="filter"
                                 select
                                 variant="standard"
-                                value={paymentMethod}
+                                value={sale.paymentMethod}
                                 InputProps={{
                                     style: { fontSize: '.8rem' },
                                 }}
@@ -41,7 +41,7 @@ const SaleConfirmation = (
                             </TextField>
                         </li>
                         {
-                            paymentMethod === PaymentMethod.EFECTIVO ? (
+                            sale.paymentMethod === PaymentMethod.EFECTIVO ? (
                                 <>
                                     <li className="product-detail-item">
                                         <div className="product-detail-title"><b>Paga con</b></div>

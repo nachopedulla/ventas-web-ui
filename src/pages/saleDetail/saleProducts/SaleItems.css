@@ -1,0 +1,52 @@
+.sale-items-container {
+    margin-top: 20px;
+    overflow: -moz-scrollbars-vertical; 
+    overflow-y: scroll;
+}
+
+.sale-items-list {
+    overflow: -moz-scrollbars-vertical; 
+    padding: 5px 20px;
+    overflow-y: scroll;
+    max-height: 250px;
+    background-color: rgb(240, 240, 240);
+}
+
+.sale-items-total {
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    padding: 5px 20px;
+    font-size: 1.1rem;
+    font-weight: 550;
+}
+
+.sale-product-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: .85rem;
+    align-items: center
+}
+
+.sale-product-barcode { 
+    color: grey;
+    font-size: .8rem
+}
+
+.sale-items-title {
+    color: #0050C3;  
+    font-weight: 550; 
+}
+
+.sale-product-name-and-code {
+    line-height: 2px;
+    width: 55%;
+    text-overflow: ellipsis;
+}
+
+.sale-product-count-or-price {
+    display: flex;
+    width: 14%;
+    justify-content: end;
+}

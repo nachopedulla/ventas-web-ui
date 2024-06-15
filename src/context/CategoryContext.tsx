@@ -7,7 +7,7 @@ const CategoriesContext = React.createContext({
     get: (): Array<string> => []
 });
 
-const CategoriesProvider = (props: any) => {
+const CategoriesContextProvider = (props: any) => {
 
     const get = () : Array<string> => {
         return getAll();
@@ -51,4 +51,4 @@ const CategoriesProvider = (props: any) => {
 const useCategories = () => React.useContext(CategoriesContext);
 
 
-export { CategoriesProvider, useCategories };
+export { CategoriesContextProvider, useCategories };

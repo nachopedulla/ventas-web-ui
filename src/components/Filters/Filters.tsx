@@ -1,6 +1,6 @@
 import TextField from '@mui/material/TextField';
 import { MenuItem } from '@mui/material';
-import { SearchRequest } from '../../models/Movement';
+import { SearchRequest } from '../../models/Sale';
 import { Form } from '../../models/Filter';
 import './Filters.css';
 

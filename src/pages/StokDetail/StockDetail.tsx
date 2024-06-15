@@ -2,16 +2,19 @@ import { Button, InputAdornment, MenuItem, TextField } from "@mui/material"
 import { FaDollarSign } from "@react-icons/all-files/fa/FaDollarSign";
 import { FaBarcode } from "@react-icons/all-files/fa/FaBarcode";
 import { useNavigate, useParams } from "react-router-dom";
-import { Product } from "../../models/Product";
+import { Product, Unity } from "../../models/Product";
 import { useEffect, useState } from "react";
 import TooltipIconButton from "../../components/TooltipIconButton/TooltipIconButton";
 import { useProducts } from "../../context/ProductContext";
 import Modal from "../../components/Modal/Modal";
-import './ProductItem.css';
-import ProductDetail from "./components/ProductDetail";
 import { useCategories } from "../../context/CategoryContext";
+import PageTitle from "../../components/PageTitle/PageTitle";
+import { FaEdit } from '@react-icons/all-files/fa/FaEdit';
+import { FaSave } from '@react-icons/all-files/fa/FaSave';
+import ProductItem from "./components/ProductItem";
+import './StockDetail.css';
 
-const ProductItem = ({ title }: { title: string }) => {
+const StockDetail = ({ title }: { title: string }) => {
 
     const { productId } = useParams();
 
@@ -49,7 +52,7 @@ const ProductItem = ({ title }: { title: string }) => {
 
     return product === undefined ? null : (
         <div>
-            <h4>{title}</h4>
+            <PageTitle text={title} />
             <div className="product-form">
                 <TextField
                     disabled={disabled}
@@ -93,7 +96,7 @@ const ProductItem = ({ title }: { title: string }) => {
                 >
                     <MenuItem value={undefined}></MenuItem>
                     {
-                        categories.get().map(category => 
+                        categories.get().map(category =>
                             <MenuItem key={category} value={category}>{category}</MenuItem>
                         )
                     }
@@ -134,7 +137,23 @@ const ProductItem = ({ title }: { title: string }) => {
                 />
                 <TextField
                     disabled={disabled}
-                    className="product-filter"
+                    className="product-filter-unity"
+                    id='unity'
+                    InputLabelProps={{ shrink: true }}
+                    type='text'
+                    select
+                    label='Unidad del precio'
+                    value={product?.unity}
+                    onChange={(event) => changeHandler('unity', event)}
+                >
+                    <MenuItem value={Unity.Unidad}>Unidades</MenuItem>
+                    <MenuItem value={Unity.Kilo}>Kilogramo</MenuItem>
+                    <MenuItem value={Unity.Litro}>Litro</MenuItem>
+                    <MenuItem value={Unity.Metro}>Metro</MenuItem>                    
+                </TextField>
+                <TextField
+                    disabled={disabled}
+                    className="product-filter-stock"
                     id='stock'
                     label='Stock'
                     InputLabelProps={{ shrink: true }}
@@ -150,6 +169,7 @@ const ProductItem = ({ title }: { title: string }) => {
                         className="product-button"
                         variant="outlined"
                         onClick={() => setDisabled(!disabled)}
+                        endIcon={<FaEdit size={14} />}
                     >
                         Editar
                     </Button>
@@ -158,27 +178,19 @@ const ProductItem = ({ title }: { title: string }) => {
                         size="medium"
                         className="product-button"
                         variant="outlined"
+                        endIcon={<FaSave size={14} />}
                         onClick={() => setShowConfirmation(!showConfirmation)}
                     >
                         Guardar
                     </Button>
                 )}
-                <Button
-                    size="medium"
-                    className="button"
-                    variant="outlined"
-                    color='error'
-                    onClick={goBack}
-                >
-                    Volver
-                </Button>
             </div>
             <Modal
                 show={showConfirmation}
                 cancel={() => setShowConfirmation(!showConfirmation)}
                 confirm={save}
             >
-                <ProductDetail
+                <ProductItem
                     title="DETALLE DEL PRODUCTO"
                     product={product}
                 />
@@ -187,4 +199,4 @@ const ProductItem = ({ title }: { title: string }) => {
     )
 }
 
-export default ProductItem;
+export default StockDetail;

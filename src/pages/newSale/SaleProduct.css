@@ -1,0 +1,54 @@
+.sale-product-container { 
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    font-size: .9rem;
+    gap: 20px;
+}
+
+.sale-product-buttons {
+    display: flex;
+    column-gap: 5px;
+    width: 90px;
+    justify-content: end;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sale-product-button {
+    background-color: #a9bedc;
+    height: 22px;
+    width: 22px; 
+    justify-content: center; 
+    display: flex;
+    align-items: center; 
+    border-radius: 3px
+}
+
+.sale-product-count {
+    width: 25px;
+    text-align: center;
+}
+
+.sale-product-name {
+    width: 180px;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    overflow:hidden
+}
+
+.sale-product-price {
+    width: 120px;
+    text-align: end;
+}
+
+.sale-product-text {
+    width: 72;
+    background-color: white; 
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

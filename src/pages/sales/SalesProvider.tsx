@@ -1,4 +1,4 @@
-import { PaymentMethod } from "../../models/Movement"
+import { PaymentMethod, SaleItem } from "../../models/Sale"
 import { TableCellProps } from "@mui/material"
 import { formatAmount, formatNumber } from "../../utils/NumberUtil"
 import Sales from "./Sales"
@@ -45,33 +45,30 @@ const FORMS = [
 
 const HEADERS = [
     {
+        id: 'id',
+        label: 'Nro. de Venta',
+        align: 'left' as TableCellProps["align"],
+    },
+    {
         id: 'date',
         label: 'Fecha',
         align: 'left' as TableCellProps["align"]
     },
+    {
+        id: 'paymentMethod',
+        label: 'Medio de pago',
+        align: 'left' as TableCellProps["align"],
+    }, 
     {
         id: 'amount',
         label: 'Monto',
         align: 'right' as TableCellProps["align"],
         formatter: formatAmount
     },
-    {
-        id: 'paymentMethod',
-        label: 'Medio de pago',
-        align: 'right' as TableCellProps["align"],
-    },
 ]
 
 const SalesProvider = () => (
-    <>
-        <Sales title="Ventas" forms={FORMS} headers={HEADERS} />
-        <ResultTable 
-            data={SALES_DATA} 
-            headers={HEADERS} 
-            detailHandler={() => { }}
-            removeHanlder={() => []} 
-        />
-    </>
+    <Sales title="Ventas" forms={FORMS} headers={HEADERS} />
 )
 
 export default SalesProvider;

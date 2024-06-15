@@ -1,7 +1,5 @@
 import styled from "@emotion/styled";
-import { IconButton, Paper, Table, TableBody, TableCell, TableCellProps, TableContainer, TableHead, TableRow, Tooltip } from "@mui/material"
-import { FaEye } from "@react-icons/all-files/fa/FaEye";
-import { FaTrash } from "@react-icons/all-files/fa/FaTrash";
+import { Paper, Table, TableBody, TableCell, TableCellProps, TableContainer, TableHead, TableRow } from "@mui/material"
 import './ResultTable.css';
 import TooltipIconButton from "../TooltipIconButton/TooltipIconButton";
 
@@ -16,21 +14,31 @@ export interface Header {
     align: TableCellProps['align']
 }
 
+export interface Action {
+    id: string,
+    handler: Function,
+    icon: React.ReactElement
+}
+
 
 const ResultTable = (
     {
         headers,
         data,
         detailHandler,
-        removeHanlder
+        removeHanlder,
+        actions
     }:
         {
             headers: Array<Header>,
             data: Array<any>,
-            detailHandler: Function,
-            removeHanlder: Function
+            detailHandler?: Function | undefined,
+            removeHanlder?: Function | undefined,
+            actions?: Array<Action>
         }
 ) => {
+
+    const withActions = (): boolean => detailHandler !== undefined || removeHanlder !== undefined;
 
     return (
         <div className='result-table'>
@@ -50,7 +58,16 @@ const ResultTable = (
                                         </TableHeaderCell>
                                     ))
                                 }
-                                <TableHeaderCell key='actions' className='table-header'>Acciones</TableHeaderCell>
+                                {
+                                    actions && actions?.length > 0 ?
+                                        <TableHeaderCell
+                                            key='actions'
+                                            className='table-header'
+                                            align="center"
+                                        >
+                                            Acciones
+                                        </TableHeaderCell> : null
+                                }
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -64,22 +81,25 @@ const ResultTable = (
                                                 >
                                                     {header.formatter === undefined ? row[header.id] : header.formatter(row[header.id])}
                                                 </TableCell>
+
                                             ))
                                         }
-                                        <TableCell>
-                                            <div style={{ display: 'flex', columnGap: '15px' }}>
-                                                <TooltipIconButton
-                                                    title="Ver detalle"
-                                                    handler={() => detailHandler(row['id'])}
-                                                    icon={<FaEye size={14} />}
-                                                />
-                                                <TooltipIconButton
-                                                    title="Eliminar"
-                                                    handler={() => removeHanlder(row['id'])}
-                                                    icon={<FaTrash size={14} color='#e30000' />}
-                                                />
-                                            </div>
-                                        </TableCell>
+                                        {
+                                            actions ? (
+                                                <TableCell align="center">
+                                                    {
+                                                        actions.map(action =>
+                                                            <TooltipIconButton
+                                                                key={action.id}
+                                                                title={action.id}
+                                                                handler={() => action.handler(row['id'])}
+                                                                icon={action.icon}
+                                                            />
+                                                        )
+                                                    }
+                                                </TableCell>
+                                            ) : null
+                                        }
                                     </TableRow>
                                 ))
                             }

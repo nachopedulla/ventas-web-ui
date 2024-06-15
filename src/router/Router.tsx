@@ -1,10 +1,12 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
-import ProductDetail from "../pages/product/ProductItem";
+import StockDetail from "../pages/StokDetail/StockDetail";
 import StockProvider from "../pages/stock/StockProvider";
 import SalesProvider from "../pages/sales/SalesProvider";
 import Login from "../pages/login/Login";
 import ProtectedRoute from "./ProtectedRoute";
+import SaleDetail from "../pages/saleDetail/SaleDetail";
+import NewSale from "../pages/newSale/NewSale";
 
 /*
   <BrowserRouter basename={`/${process.env.PUBLIC_URL}`}> 
@@ -36,7 +38,7 @@ const Router = () => {
             <Route
               path="/productos/nuevo"
               element={
-                <ProductDetail
+                <StockDetail
                   title="Nuevo Producto"
                 />
               }
@@ -44,10 +46,20 @@ const Router = () => {
             <Route
               path="/productos/:productId"
               element={
-                <ProductDetail
+                <StockDetail
                   title="Detalle de producto"
                 />
               }
+            />
+            <Route
+              path="/ventas/:saleId"
+              element={
+                <SaleDetail/>
+              }
+            />
+            <Route
+              path='/ventas/nueva'
+              element={ <NewSale /> }
             />
             < Route path="/" element={<SalesProvider />} />
           </Route>

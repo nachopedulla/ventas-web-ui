@@ -2,6 +2,7 @@ import Stock from "./Stock"
 import { TableCellProps } from "@mui/material"
 import { formatAmount, formatNumber } from "../../utils/NumberUtil"
 import { useCategories } from "../../context/CategoryContext"
+import { Unity, unityMap } from "../../models/Product"
 
 const StockProvider = () => {
 
@@ -54,11 +55,17 @@ const StockProvider = () => {
             formatter: formatAmount
         },
         {
+            id: 'unity',
+            label: 'Unidad del Precio',
+            align: 'left' as TableCellProps["align"],
+            formatter: (unity: Unity) => unityMap().get(unity)?.stockLabel
+        },
+        {
             id: 'stock',
             label: 'En stock',
             align: 'right' as TableCellProps["align"],
             formatter: formatNumber
-        }
+        },
     ]
 
     return (

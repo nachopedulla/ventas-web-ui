@@ -32,5 +32,30 @@
 }
 
 .product-button {
-    width: 110px;
+    width: 125px;
+}
+
+
+.product-filter-stock {
+    width: 13%;
+
+    @media (max-width: 1200px) {
+        width: 20%;
+    }
+
+    @media (max-width: 600px) {
+        width: 46%;
+    }
+}
+
+.product-filter-unity {
+    width: 13%;
+
+    @media (max-width: 1200px) {
+        width: 19%;
+    }
+
+    @media (max-width: 600px) {
+        width: 45%;
+    }
 }

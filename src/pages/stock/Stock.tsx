@@ -7,10 +7,13 @@ import { useProducts } from "../../context/ProductContext";
 import { useNavigate } from "react-router-dom";
 import ResultTable, { Header } from "../../components/Table/ResultTable";
 import { Form } from "../../models/Filter";
-import { SearchRequest } from "../../models/Movement";
+import { SearchRequest } from "../../models/Sale";
 import { Product } from "../../models/Product";
-import ProductDetail from "../product/components/ProductDetail";
+import ProductDetail from "../StokDetail/components/ProductItem";
 import { isNotFiltered } from "../../utils/RequestUtils";
+import { FaEye } from "@react-icons/all-files/fa/FaEye";
+import { FaTrash } from "@react-icons/all-files/fa/FaTrash";
+import { icons } from "@react-icons/all-files";
 
 const Stock = ({ forms, headers }: { forms: Array<Form>, headers: Array<Header> }) => {
 
@@ -51,6 +54,21 @@ const Stock = ({ forms, headers }: { forms: Array<Form>, headers: Array<Header> 
         setSearchRequest(auxRequest);
     }
 
+
+    const ACTIONS = [
+        {
+            id: 'Ver detalle',
+            icon: <FaEye size={14}/>,
+            handler: showDetailHandler
+        },
+        {
+            id: 'Eliminar',
+            icon: <FaTrash size={14} color='#c11f1f'/>,
+            handler: handleConfirm
+        }
+    ]
+
+
     return (
         <>
             <h4>{`Inventario`}</h4>
@@ -69,20 +87,18 @@ const Stock = ({ forms, headers }: { forms: Array<Form>, headers: Array<Header> 
             <ResultTable
                 headers={headers}
                 data={filterAndSort()}
-                detailHandler={showDetailHandler}
-                removeHanlder={handleConfirm}
+                actions={ACTIONS}
             />
             <Modal
                 show={showConfirmation}
                 cancel={handleConfirm}
                 confirm={removeHandler}
             >
-                
-                <ProductDetail 
+                <ProductDetail
                     title="¿Está segudo de que desea eliminar el elemento?"
                     product={products.getById(selectedItem!)!}
                 />
-                
+
             </Modal>
         </>
     );

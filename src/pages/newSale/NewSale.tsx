@@ -1,16 +1,20 @@
 import { useState } from "react"
-import { Sale, SaleItem, total } from "../../models/Sale"
-import { InputAdornment, TableCellProps, TextField } from "@mui/material"
+import { PaymentMethod, Sale, SaleItem, total } from "../../models/Sale"
+import { Button, InputAdornment, TableCellProps, TextField } from "@mui/material"
 import TooltipIconButton from "../../components/TooltipIconButton/TooltipIconButton"
 import { FaBarcode } from "@react-icons/all-files/fa/FaBarcode"
 import { useProducts } from "../../context/ProductContext"
-import SaleProduct from "./SaleProduct"
+import SaleProduct from "./components/SaleProduct"
 import ResultTable from "../../components/Table/ResultTable"
 import { formatAmount } from "../../utils/NumberUtil"
-import './NewSale.css';
-import { Unity } from "../../models/Product"
+import { Unity, unityMap } from "../../models/Product"
 import { IoMdAddCircle } from "@react-icons/all-files/io/IoMdAddCircle";
 import PageTitle from "../../components/PageTitle/PageTitle"
+import Modal from "../../components/Modal/Modal"
+import SaleConfirmation from "./components/SaleConfirmation"
+import { useSales } from "../../context/SaleContext"
+import { useNavigate } from "react-router-dom"
+import './NewSale.css';
 
 const HEADERS = [
     {
@@ -27,9 +31,12 @@ const HEADERS = [
 
 const NewSale = () => {
 
-    const [sale, setSale] = useState<Sale>({ items: [] })
+    const [sale, setSale] = useState<Sale>({ paymentMethod: PaymentMethod.EFECTIVO, items: [] })
     const [search, setSeach] = useState<string>();
+    const [showConfirmation, setShowConfirmation] = useState(false);
 
+    const sales = useSales();
+    const navigate = useNavigate();
     const products = useProducts();
 
     const filteredProducts = () => {
@@ -51,9 +58,10 @@ const NewSale = () => {
         if (count === 0) {
             auxSale.items!.splice(index!, 1);
         } else {
-            currentItem.count = count as number;
+            currentItem.count = count as number > 99 && currentItem.unity === Unity.Unidad ? 99 : count as number;
             auxSale.items![index!] = currentItem!;
         }
+        auxSale.amount = auxSale.items?.map(item => total(item)).reduce((a, b) => a + b, 0);
         setSale(auxSale);
     }
 
@@ -70,6 +78,7 @@ const NewSale = () => {
             count: product.unity === Unity.Unidad ? 1 : 0,
             unity: product.unity!
         })
+        auxSale.amount = auxSale.items?.map(item => total(item)).reduce((a, b) => a + b, 0);
         setSale(auxSale);
     }
 
@@ -81,9 +90,18 @@ const NewSale = () => {
         }
     ]
 
+    const confirmSale = () => {
+        sales.add(sale);
+        sale.items?.map(item => {
+            const count = item.unity === Unity.Unidad ? item.count :  item.count / unityMap().get(item.unity)!.scale;
+            products.updateStockOnSale(item.id, count)
+        });
+        navigate('/ventas');
+    }
+
     return (
         <>
-            <PageTitle text="Nueva venta"/>
+            <PageTitle text="Nueva venta" />
             <div className="sale-products-container">
                 <div className="sale-products-filter">
                     <TextField
@@ -93,6 +111,7 @@ const NewSale = () => {
                         value={search}
                         onChange={(event) => setSeach(event.target.value)}
                         InputProps={{
+                            inputProps: { min: 0, max: 99 },
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <TooltipIconButton
@@ -105,11 +124,11 @@ const NewSale = () => {
                         }}
                     />
                     <div className="sale-product-table">
-                    <ResultTable
-                        headers={HEADERS}
-                        data={filteredProducts()}
-                        actions={actions}
-                    />
+                        <ResultTable
+                            headers={HEADERS}
+                            data={filteredProducts()}
+                            actions={actions}
+                        />
                     </div>
                 </div >
                 {
@@ -124,12 +143,37 @@ const NewSale = () => {
                             </div>
                             <div className="total-container">
                                 <p>Total</p>
-                                <p>{formatAmount(sale.items?.map(item => total(item)).reduce((a, b) => a + b, 0))}</p>
+                                <p>{formatAmount(sale.amount)}</p>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'end' }}>
+                                <Button
+                                    size="large"
+                                    variant="contained"
+                                    color="success"
+                                    onClick={() => setShowConfirmation(true)}
+                                >
+                                    CONTINUAR
+                                </Button>
                             </div>
                         </div>
                     ) : null
                 }
-            </div >
+                <Modal
+                    cancel={() => setShowConfirmation(false)}
+                    confirm={confirmSale}
+                    show={showConfirmation}
+                >
+                    <SaleConfirmation
+                        sale={sale}
+                        paymentMethod={sale.paymentMethod!}
+                        changeHandler={(paymentMethod: PaymentMethod) => {
+                            const auxSale = { ...sale };
+                            auxSale.paymentMethod = paymentMethod;
+                            setSale(sale)
+                        }}
+                    />
+                </Modal>
+            </div>
         </>
     )
 }

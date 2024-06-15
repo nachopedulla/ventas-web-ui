@@ -19,7 +19,7 @@ export interface Sale {
     id?: string,
     amount?: number,
     paymentMethod?: PaymentMethod
-    date?: string,
+    date?: Date,
     items?: Array<SaleItem>
 }
 

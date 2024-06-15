@@ -9,7 +9,8 @@ const ProductContext = React.createContext({
     get: (): Array<Product> => [],
     getById: (id: string): Product | undefined => undefined,
     remove: (id: string | undefined) => { },
-    upsert: (product: Product) => { }
+    upsert: (product: Product) => { },
+    updateStockOnSale: (id: string, toSubtact: number) => { }
 });
 
 const ProductProvider = (props: any) => {
@@ -66,6 +67,12 @@ const ProductProvider = (props: any) => {
         setItems(products);
     }
 
+    function updateStockOnSale(id: string, toSubtact: number) {
+        var product = getById(id)!
+        product.stock =  (product.stock === undefined ? 0 : product.stock!) - toSubtact;
+        update(product);
+    }
+
     function setItems(products: Array<any>) {
         localStorage.setItem('products', JSON.stringify(products));
     }
@@ -83,8 +90,9 @@ const ProductProvider = (props: any) => {
         localStorage.setItem('expiration', date.toISOString());
     }
 
+
     return (
-        <ProductContext.Provider value={{ get, getById, upsert, remove }} {...props} />
+        <ProductContext.Provider value={{ get, getById, upsert, remove, updateStockOnSale }} {...props} />
     )
 }
 

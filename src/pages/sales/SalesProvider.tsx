@@ -4,6 +4,7 @@ import { formatAmount, formatNumber } from "../../utils/NumberUtil"
 import Sales from "./Sales"
 import ResultTable from "../../components/Table/ResultTable"
 import { SALES_DATA } from "../../mocks/SalesMock"
+import moment from "moment"
 
 const FORMS = [
     {
@@ -52,7 +53,8 @@ const HEADERS = [
     {
         id: 'date',
         label: 'Fecha',
-        align: 'left' as TableCellProps["align"]
+        align: 'left' as TableCellProps["align"],
+        formatter: (date: Date) => moment(date).format('DD/MM/yyyy, hh:mm:ss a')
     },
     {
         id: 'paymentMethod',

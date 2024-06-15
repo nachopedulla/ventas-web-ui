@@ -1,12 +1,12 @@
-import { SaleItem, total } from "../../models/Sale";
+import { SaleItem, total } from "../../../models/Sale";
 import { FiPlus } from '@react-icons/all-files/fi/FiPlus';
 import { RiSubtractFill } from "@react-icons/all-files/ri/RiSubtractFill";
-import { formatAmount } from "../../utils/NumberUtil";
+import { formatAmount } from "../../../utils/NumberUtil";
 import './SaleProduct.css';
-import { Unity, unityMap } from "../../models/Product";
+import { Unity, unityMap } from "../../../models/Product";
 import { InputAdornment, TextField } from "@mui/material";
 import { FaTrash } from "@react-icons/all-files/fa/FaTrash";
-import TooltipIconButton from "../../components/TooltipIconButton/TooltipIconButton";
+import TooltipIconButton from "../../../components/TooltipIconButton/TooltipIconButton";
 
 const SaleProduct = ({ item, changeHandler }: { item: SaleItem, changeHandler: Function }) => {
 
@@ -31,10 +31,7 @@ const SaleProduct = ({ item, changeHandler }: { item: SaleItem, changeHandler: F
                                 value={item.count}
                                 variant="outlined"
                                 type='number'
-                                onChange={(event) => {
-                                    alert(event.target.value);
-                                    changeHandler(item, event.target.value)}
-                                }
+                                onChange={(event) => changeHandler(item, event.target.value)}
                                 InputProps={{
                                     style: { fontSize: '.8rem' },
                                 }}

@@ -8,7 +8,7 @@ import SuccessIconButton from '../../components/Button/Success';
 import { FaPlus } from '@react-icons/all-files/fa/FaPlus';
 import { FaEye } from '@react-icons/all-files/fa/FaEye';
 import { useNavigate } from 'react-router-dom';
-import { SALES_DATA } from '../../mocks/SalesMock';
+import { useSales } from '../../context/SaleContext';
 
 
 const STOCK_FORMS = [
@@ -23,15 +23,14 @@ const STOCK_FORMS = [
     }
 ]
 
-
 const Sales = ({ title, forms, headers }: { title: string, forms: Array<Form>, headers: Array<Header> }) => {
 
     const [request, setRequest] = useState({ dateUntil: undefined, dateFrom: undefined, paymentMethod: undefined });
+
     const navigate = useNavigate();
-
     const showDetailHandler = (id: string) => navigate('/ventas/' + id);
-
     const newSaleHandler = (id: string) => navigate('/ventas/nueva');
+    const sales = useSales();
 
     const actions = [
         {
@@ -55,7 +54,7 @@ const Sales = ({ title, forms, headers }: { title: string, forms: Array<Form>, h
                 handler={newSaleHandler}
             />
             <ResultTable
-                data={SALES_DATA}
+                data={sales.get()}
                 headers={headers}
                 actions={actions}
             />

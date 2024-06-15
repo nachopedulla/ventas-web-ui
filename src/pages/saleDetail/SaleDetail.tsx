@@ -9,6 +9,7 @@ import SaleItems from "./saleProducts/SaleItems";
 import { FaArrowLeft } from "@react-icons/all-files/fa/FaArrowLeft";
 import TooltipIconButton from "../../components/TooltipIconButton/TooltipIconButton";
 import PageTitle from "../../components/PageTitle/PageTitle";
+import { formatDate } from "../../utils/DateUtil";
 
 
 const SaleDetail = () => {
@@ -31,7 +32,7 @@ const SaleDetail = () => {
                 <TextField
                     className='filter'
                     id='datetime'
-                    value={sale?.date}
+                    value={formatDate(sale?.date)}
                     label='Fecha y Hora'
                     variant='standard'
                     inputProps={{ readOnly: true }}

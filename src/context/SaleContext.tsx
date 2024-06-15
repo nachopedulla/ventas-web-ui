@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { Sale } from "../models/Sale";
 import { SALES_DATA } from "../mocks/SalesMock";
-import moment from "moment";
 
 const SaleContext = React.createContext({
     get: (): Array<Sale> => [], /* TODO: filtros y parametros de paginado */

@@ -15,7 +15,6 @@ import NewSale from "../pages/newSale/NewSale";
 
 const Router = () => {
 
-
   return (
     <BrowserRouter basename={`/${process.env.PUBLIC_URL}`}>
       <Routes >

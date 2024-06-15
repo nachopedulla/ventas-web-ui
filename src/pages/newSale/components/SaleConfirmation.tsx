@@ -33,7 +33,7 @@ const SaleConfirmation = (
                                     style: { fontSize: '.8rem' },
                                 }}
                                 InputLabelProps={{ shrink: true }}
-                                onChange={(event) => changeHandler(event.target.value)}
+                                onChange={(event) => changeHandler(event.target.value as PaymentMethod)}
                             >
                                 <MenuItem value={PaymentMethod.EFECTIVO}> EFECTIVO </MenuItem>
                                 <MenuItem value={PaymentMethod.TRANSFERENCIA}> TRANSFERENCIA </MenuItem>

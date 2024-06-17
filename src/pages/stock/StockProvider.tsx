@@ -1,8 +1,9 @@
-import Stock from "./Stock"
+
 import { TableCellProps } from "@mui/material"
 import { formatAmount, formatNumber } from "../../utils/NumberUtil"
 import { useCategories } from "../../context/CategoryContext"
 import { Unity, unityMap } from "../../models/Product"
+import Stock from "./Stock"
 
 const StockProvider = () => {
 

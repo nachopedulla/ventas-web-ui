@@ -95,7 +95,7 @@ const Stock = ({ forms, headers }: { forms: Array<Form>, headers: Array<Header> 
                 confirm={removeHandler}
             >
                 <ProductDetail
-                    title="¿Está segudo de que desea eliminar el elemento?"
+                    title="¿Está seguro de que desea eliminar el elemento?"
                     product={products.getById(selectedItem!)!}
                 />
 

@@ -34,6 +34,14 @@ const SaleProduct = ({ item, changeHandler }: { item: SaleItem, changeHandler: F
                                 onChange={(event) => changeHandler(item, event.target.value)}
                                 InputProps={{
                                     style: { fontSize: '.8rem' },
+                                    sx: {
+                                        '& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
+                                            display: 'none'
+                                        },
+                                        '& input[type=number]': {
+                                            MozAppearance: 'textfield'
+                                        },
+                                    },
                                 }}
                             />
                             <div className="sale-product-button">
@@ -52,6 +60,14 @@ const SaleProduct = ({ item, changeHandler }: { item: SaleItem, changeHandler: F
                                 onChange={(event) => changeHandler(item, event.target.value)}
                                 InputProps={{
                                     style: { fontSize: '.9rem' },
+                                    sx: {
+                                        '& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
+                                            display: 'none'
+                                        },
+                                        '& input[type=number]': {
+                                            MozAppearance: 'textfield'
+                                        },
+                                    },
                                     endAdornment: (
                                         <InputAdornment position="end">
                                             {unityMap().get(item.unity)?.label}

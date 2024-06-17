@@ -27,6 +27,12 @@ const SaleContextProvider = (props: any) => {
         setSales([...sales, sale]);
     }
 
+    const remove = (sale: Sale) => {
+        sale.id = Date.now().toString();
+        sale.date = new Date();
+        setSales([...sales, sale]);
+    }
+
     return (
         <SaleContext.Provider value={{ get, getById, add }} {...props} />
     )

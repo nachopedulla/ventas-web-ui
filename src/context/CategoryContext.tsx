@@ -31,7 +31,7 @@ const CategoriesContextProvider = (props: any) => {
     }
 
     function expiration(): Date {
-        var expiration = localStorage.getItem('expiration');
+        var expiration = localStorage.getItem('categories_expiration');
         if (expiration === null) {
             setExpiration(new Date());
             return new Date();
@@ -40,7 +40,7 @@ const CategoriesContextProvider = (props: any) => {
     }
 
     function setExpiration(date: Date) {
-        localStorage.setItem('expiration', date.toISOString());
+        localStorage.setItem('categories_expiration', date.toISOString());
     }
 
     return (

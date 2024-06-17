@@ -111,6 +111,14 @@ const StockDetail = ({ title }: { title: string }) => {
                     InputLabelProps={{ shrink: true }}
                     value={product?.unitaryPrice}
                     InputProps={{
+                        sx: {
+                            '& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
+                                display: 'none'
+                            },
+                            '& input[type=number]': {
+                                MozAppearance: 'textfield'
+                            },
+                        },
                         startAdornment: (
                             <InputAdornment position="start">
                                 <FaDollarSign />
@@ -128,6 +136,14 @@ const StockDetail = ({ title }: { title: string }) => {
                     InputLabelProps={{ shrink: true }}
                     value={product?.unitaryCost}
                     InputProps={{
+                        sx: {
+                            '& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
+                                display: 'none'
+                            },
+                            '& input[type=number]': {
+                                MozAppearance: 'textfield'
+                            },
+                        },
                         startAdornment: (
                             <InputAdornment position="start">
                                 <FaDollarSign />
@@ -160,6 +176,16 @@ const StockDetail = ({ title }: { title: string }) => {
                     type='number'
                     value={product?.stock}
                     onChange={(event) => changeHandler('stock', event)}
+                    InputProps={{
+                        sx: {
+                            '& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
+                                display: 'none'
+                            },
+                            '& input[type=number]': {
+                                MozAppearance: 'textfield'
+                            },
+                        },
+                    }}
                 />
             </div>
             <div className="product-buttons">

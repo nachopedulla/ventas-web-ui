@@ -6,8 +6,8 @@ import { unityMap } from "../../../models/Product";
 import { FaDollarSign } from "@react-icons/all-files/fa/FaDollarSign";
 
 const SaleConfirmation = (
-    { sale, changeHandler }: 
-    { sale: Sale, paymentMethod: PaymentMethod, changeHandler: Function}
+    { sale, changeHandler }:
+        { sale: Sale, paymentMethod: PaymentMethod, changeHandler: Function }
 ) => {
 
     const [paid, setPaid] = useState<number | undefined>();
@@ -49,11 +49,19 @@ const SaleConfirmation = (
                                             className="filter"
                                             variant="standard"
                                             type="number"
-
                                             value={paid}
+
                                             InputLabelProps={{ shrink: true }}
                                             onChange={(event) => setPaid(Number.parseFloat(event.target.value))}
                                             InputProps={{
+                                                sx: {
+                                                    '& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
+                                                        display: 'none'
+                                                    },
+                                                    '& input[type=number]': {
+                                                        MozAppearance: 'textfield'
+                                                    },
+                                                },
                                                 style: { fontSize: '.9rem' },
                                                 startAdornment: (
                                                     <InputAdornment position="start">

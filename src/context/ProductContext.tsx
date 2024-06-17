@@ -78,7 +78,7 @@ const ProductProvider = (props: any) => {
     }
 
     function expiration(): Date {
-        var expiration = localStorage.getItem('expiration');
+        var expiration = localStorage.getItem('products_expiration');
         if (expiration === null) {
             setExpiration(new Date());
             return new Date();
@@ -87,7 +87,7 @@ const ProductProvider = (props: any) => {
     }
 
     function setExpiration(date: Date) {
-        localStorage.setItem('expiration', date.toISOString());
+        localStorage.setItem('products_expiration', date.toISOString());
     }
 
 

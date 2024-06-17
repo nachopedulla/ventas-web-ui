@@ -2,7 +2,10 @@ import { PaymentMethod } from "../../models/Sale"
 import { TableCellProps } from "@mui/material"
 import { formatAmount } from "../../utils/NumberUtil"
 import { formatDate } from "../../utils/DateUtil"
-import Sales from "./Sales"
+import Expenses from "./Expenses"
+import { CONCEPTS } from "../../mocks/ConceptMock"
+
+const OPTIONS = CONCEPTS.map(concept => { return { value: concept, label: concept } })
 
 const FORMS = [
     {
@@ -16,9 +19,9 @@ const FORMS = [
         label: 'Fecha hasta',
     },
     {
-        id: 'paymentMethod',
+        id: 'category',
         type: 'select',
-        label: 'Medio de pago',
+        label: 'Categoría',
         default: 'Todos',
         options: [
             {
@@ -26,28 +29,12 @@ const FORMS = [
                 label: 'Todos',
                 color: 'grey'
             },
-            {
-                value: PaymentMethod.EFECTIVO,
-                label: 'EFECTIVO'
-            },
-            {
-                value: PaymentMethod.TARJETA,
-                label: 'TARJETA'
-            },
-            {
-                value: PaymentMethod.TRANSFERENCIA,
-                label: 'TRANSFERENCIA'
-            },
+            ...OPTIONS
         ]
     }
 ]
 
 const HEADERS = [
-    {
-        id: 'id',
-        label: 'Nro. de Venta',
-        align: 'left' as TableCellProps["align"],
-    },
     {
         id: 'date',
         label: 'Fecha',
@@ -55,10 +42,15 @@ const HEADERS = [
         formatter: formatDate
     },
     {
-        id: 'paymentMethod',
-        label: 'Medio de pago',
+        id: 'category',
+        label: 'Categoria',
         align: 'left' as TableCellProps["align"],
-    }, 
+    },
+    {
+        id: 'concept',
+        label: 'Descripción',
+        align: 'left' as TableCellProps["align"],
+    },
     {
         id: 'amount',
         label: 'Monto',
@@ -67,8 +59,8 @@ const HEADERS = [
     },
 ]
 
-const SalesProvider = () => (
-    <Sales title="Ventas" forms={FORMS} headers={HEADERS} />
+const ExpensesProvider = () => (
+    <Expenses forms={FORMS} headers={HEADERS} />
 )
 
-export default SalesProvider;
+export default ExpensesProvider;

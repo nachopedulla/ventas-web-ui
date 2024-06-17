@@ -3,6 +3,7 @@ import { TableCellProps } from "@mui/material"
 import { formatAmount } from "../../utils/NumberUtil"
 import { formatDate } from "../../utils/DateUtil"
 import Sales from "./Sales"
+import { Timestamp } from "firebase/firestore/lite"
 
 const FORMS = [
     {
@@ -52,7 +53,9 @@ const HEADERS = [
         id: 'date',
         label: 'Fecha',
         align: 'left' as TableCellProps["align"],
-        formatter: formatDate
+        formatter: (date: Timestamp) => {
+            return formatDate(new Date(date.seconds * 1000));
+        }
     },
     {
         id: 'paymentMethod',

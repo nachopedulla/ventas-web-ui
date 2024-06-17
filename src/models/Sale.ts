@@ -4,7 +4,7 @@ import { Unity, unityMap } from "./Product";
 export interface SearchRequest {
     name?: string,
     category?: string,
-    paymentMethod? : PaymentMethod;
+    paymentMethod? : string;
     dateFrom? : string;
     dateUntil? : string;
 }

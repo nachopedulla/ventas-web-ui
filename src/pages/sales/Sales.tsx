@@ -45,7 +45,6 @@ const Sales = ({ title, forms, headers }: { title: string, forms: Array<Form>, h
     }
 
     function changeHandler<K extends keyof SearchRequest>(key: K, event: any) {
-        alert('ASDAS')
         let auxRequest = { ...request };
         auxRequest[key] = event.target.value;
         setRequest(auxRequest);

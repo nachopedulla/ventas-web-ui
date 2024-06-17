@@ -30,9 +30,9 @@ const ExpenseDetail = ({ title }: { title: string }) => {
         }
     }, [])
 
-    function changeHandler<K extends keyof Expense>(key: K, event: any) {
+    function changeHandler<K extends keyof Expense>(key: K, value: any) {
         let auxExpense = { ...expense! };
-        auxExpense[key] = event.target.value;
+        auxExpense[key] = value;
         setExpense(auxExpense);
     }
 
@@ -54,7 +54,7 @@ const ExpenseDetail = ({ title }: { title: string }) => {
                     InputLabelProps={{ shrink: true }}
                     type='text'
                     value={expense?.concept}
-                    onChange={(event) => changeHandler('concept', event)}
+                    onChange={(event) => changeHandler('concept', event.target.value)}
                 />
                 <TextField
                     disabled={disabled}
@@ -65,7 +65,7 @@ const ExpenseDetail = ({ title }: { title: string }) => {
                     type='text'
                     select
                     value={expense?.category}
-                    onChange={(event) => changeHandler('category', event)}
+                    onChange={(event) => changeHandler('category', event.target.value)}
                 >
                     <MenuItem value={undefined}></MenuItem>
                     {
@@ -80,7 +80,7 @@ const ExpenseDetail = ({ title }: { title: string }) => {
                     id='amount'
                     label='Monto'
                     type='number'
-                    onChange={(event) => changeHandler('amount', event)}
+                    onChange={(event) => changeHandler('amount', Number.parseFloat(event.target.value))}
                     InputLabelProps={{ shrink: true }}
                     value={expense?.amount}
                     InputProps={{

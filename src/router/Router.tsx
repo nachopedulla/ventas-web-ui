@@ -7,7 +7,7 @@ import Login from "../pages/Login/Login";
 import ProtectedRoute from "./ProtectedRoute";
 import SaleDetail from "../pages/SaleDetail/SaleDetail";
 import NewSale from "../pages/NewSale/NewSale";
-import ExpensesProvider from "../pages/Expenses/ExpensesProvider";
+import ExpensesProvider from "../pages/Expense/ExpensesProvider";
 import ExpenseItem from "../pages/ExpenseDetail/ExpenseDetail";
 import ExpenseDetail from "../pages/ExpenseDetail/ExpenseDetail";
 

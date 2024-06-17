@@ -35,9 +35,9 @@ const StockDetail = ({ title }: { title: string }) => {
         }
     }, [])
 
-    function changeHandler<K extends keyof Product>(key: K, event: any) {
+    function changeHandler<K extends keyof Product>(key: K, value: any) {
         let auxProduct = { ...product! };
-        auxProduct[key] = event.target.value;
+        auxProduct[key] = value;
         setProduct(auxProduct);
     }
 
@@ -62,7 +62,7 @@ const StockDetail = ({ title }: { title: string }) => {
                     InputLabelProps={{ shrink: true }}
                     type='text'
                     value={product?.barCode}
-                    onChange={(event) => changeHandler('barCode', event)}
+                    onChange={(event) => changeHandler('barCode', event.target.value)}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment
@@ -81,7 +81,7 @@ const StockDetail = ({ title }: { title: string }) => {
                     InputLabelProps={{ shrink: true }}
                     type='text'
                     value={product?.name}
-                    onChange={(event) => changeHandler('name', event)}
+                    onChange={(event) => changeHandler('name', event.target.value)}
                 />
                 <TextField
                     disabled={disabled}
@@ -92,7 +92,7 @@ const StockDetail = ({ title }: { title: string }) => {
                     type='text'
                     select
                     value={product?.category}
-                    onChange={(event) => changeHandler('category', event)}
+                    onChange={(event) => changeHandler('category', event.target.value)}
                 >
                     <MenuItem value={undefined}></MenuItem>
                     {
@@ -107,7 +107,7 @@ const StockDetail = ({ title }: { title: string }) => {
                     id='unitaryPrice'
                     label='Precio Unitario'
                     type='number'
-                    onChange={(event) => changeHandler('unitaryPrice', event)}
+                    onChange={(event) => changeHandler('unitaryPrice', Number.parseFloat(event.target.value))}
                     InputLabelProps={{ shrink: true }}
                     value={product?.unitaryPrice}
                     InputProps={{
@@ -132,7 +132,7 @@ const StockDetail = ({ title }: { title: string }) => {
                     id='name'
                     label='Costo Unitario'
                     type='number'
-                    onChange={(event) => changeHandler('unitaryCost', event)}
+                    onChange={(event) => changeHandler('unitaryCost', Number.parseFloat(event.target.value))}
                     InputLabelProps={{ shrink: true }}
                     value={product?.unitaryCost}
                     InputProps={{
@@ -160,7 +160,7 @@ const StockDetail = ({ title }: { title: string }) => {
                     select
                     label='Unidad del precio'
                     value={product?.unity}
-                    onChange={(event) => changeHandler('unity', event)}
+                    onChange={(event) => changeHandler('unity', event.target.value)}
                 >
                     <MenuItem value={Unity.Unidad}>Unidades</MenuItem>
                     <MenuItem value={Unity.Kilo}>Kilogramo</MenuItem>
@@ -175,7 +175,7 @@ const StockDetail = ({ title }: { title: string }) => {
                     InputLabelProps={{ shrink: true }}
                     type='number'
                     value={product?.stock}
-                    onChange={(event) => changeHandler('stock', event)}
+                    onChange={(event) => changeHandler('stock', Number.parseInt(event.target.value))}
                     InputProps={{
                         sx: {
                             '& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {

@@ -7,10 +7,6 @@ const ExpenseItem = ({ title, expense }: { title?: string, expense: Expense }) =
         <p>{title}</p>
         <ul className="product-detail-list">
             <li className="product-detail-item">
-                <div className="product-detail-title"><b>Fecha</b></div>
-                <div>{formatDate(expense.date)}</div>
-            </li>
-            <li className="product-detail-item">
                 <div className="product-detail-title"><b>Descripción</b></div>
                 <div>{expense.concept}</div>
             </li>
